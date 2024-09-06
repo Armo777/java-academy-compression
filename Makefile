@@ -1,5 +1,9 @@
-run: jar
-	java -jar ./output/jcoursearchive.jar -c -input ddd.rr -output sdags.ru
+compress: jar
+	java -jar ./output/jcoursearchive.jar -c -input ./docs/romeo-and-juliet_Shakespeare.txt -output ./archived.arch
+
+extract: jar
+	java -jar ./output/jcoursearchive.jar -c -input ./archived.arch >> ./Romeo_and_Juliet.txt
+
 jar: compile
 	jar --create --file ./output/jcoursearchive.jar --main-class ws.academy.Main -C ./output/ .
 compile: clear
