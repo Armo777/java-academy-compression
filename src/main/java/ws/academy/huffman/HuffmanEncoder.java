@@ -1,6 +1,7 @@
 package ws.academy.huffman;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Map;
 
@@ -11,9 +12,14 @@ public class HuffmanEncoder {
         this.huffmanCode = huffmanCode;
     }
 
-    public void encode(String text, Writer destination) throws IOException {
+    public void encode(String text, OutputStream destination) throws IOException {
+        BitOutputStream bitOut = new BitOutputStream(destination);
         for (char c : text.toCharArray()) {
-            destination.write(huffmanCode.get(c));
+            String code = huffmanCode.get(c);
+            for (char bit : code.toCharArray()) {
+                bitOut.writeBit(bit == '1' ? 1 : 0);
+            }
         }
+        bitOut.close();
     }
 }
