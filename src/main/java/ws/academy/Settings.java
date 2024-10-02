@@ -6,7 +6,7 @@ public class Settings {
     private boolean isCompress;
     private boolean isExtract;
 
-    Settings(String[] runArgs) {
+    public Settings(String[] runArgs) {
         for (int i = 0; i < runArgs.length; i++) {
             switch (runArgs[i]) {
                 case "-c" -> isCompress = true;
@@ -25,11 +25,11 @@ public class Settings {
         return isExtract;
     }
 
-    String getInputFilePath() {
+    public String getInputFilePath() {
         return inputFilePath;
     }
 
-    String getOutputFilePath() {
+    public String getOutputFilePath() {
         return outputFilePath;
     }
 }
