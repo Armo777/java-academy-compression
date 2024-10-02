@@ -1,29 +1,23 @@
 package ws.academy.huffman;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Writer;
-
 public class HuffmanDecoder {
-    private final HuffmanTree.Node root;
+    private final HuffmanTree tree;
 
-    public HuffmanDecoder(HuffmanTree.Node root) {
-        this.root = root;
+    public HuffmanDecoder(HuffmanTree tree) {
+        this.tree = tree;
     }
 
-    public void decode(InputStream source, Writer destination) throws IOException {
-        BitInputStream bitIn = new BitInputStream(source);
-        HuffmanTree.Node currentNode = root;
+    public String decode(String encoded) {
+        StringBuilder decoded = new StringBuilder();
+        HuffmanTree node = tree;
 
-        int bit;
-        while ((bit = bitIn.readBit()) != -1) {
-            currentNode = (bit == 0) ? currentNode.left : currentNode.right;
-
-            if (currentNode.left == null && currentNode.right == null) {
-                destination.write(currentNode.character);
-                currentNode = root;
+        for (int i = 0; i < encoded.length(); i++) {
+            node = encoded.charAt(i) == '0' ? node.left : node.right;
+            if (node.content != null) {
+                decoded.append(node.content);
+                node = tree;
             }
         }
-        bitIn.close();
+        return decoded.toString();
     }
 }

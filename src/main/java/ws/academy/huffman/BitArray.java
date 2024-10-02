@@ -1,8 +1,5 @@
 package ws.academy.huffman;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 public class BitArray {
     int size;
     byte[] bytes;
@@ -66,11 +63,5 @@ public class BitArray {
             throw new IllegalArgumentException("Размер массива байтов не совпадает с размером в BitArray");
         }
         System.arraycopy(bytes, 0, this.bytes, 0, bytes.length);
-    }
-
-    // Новый метод для записи битов в байты
-    public void writeToStream(DataOutputStream stream) throws IOException {
-        stream.writeInt(size); // Сначала записываем количество битов
-        stream.write(bytes);   // Записываем сами байты
     }
 }
