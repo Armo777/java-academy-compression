@@ -64,6 +64,7 @@ public class HuffmanArchiver implements Archiver {
             HuffmanDecoder decoder = new HuffmanDecoder(tree);
             String decoded = decoder.decode(encoded.toString());
 
+            source.close();
             destination.write(decoded);
             destination.flush();
         } catch (IOException e) {
