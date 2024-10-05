@@ -37,6 +37,11 @@ public class HuffmanArchiver implements Archiver {
                 bitArray.set(i, encoded.charAt(i) == '1' ? 1 : 0);
             }
 
+            //BufferedWriter writer = new BufferedWriter(destination);
+            destination.write(new String(bitArray.getBytes()));
+            //writer.write(encoded);
+            destination.flush();
+
             String outputPath = settings.getOutputFilePath();
             saveToFile(outputPath, frequencies, bitArray);
         } catch (IOException e) {
@@ -60,6 +65,7 @@ public class HuffmanArchiver implements Archiver {
             String decoded = decoder.decode(encoded.toString());
 
             destination.write(decoded);
+            destination.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
